@@ -1,0 +1,77 @@
+{% if include.content.include_image %}
+{% if include.content.image_position == "Right" %}
+<div class="right-col-aline-image-section wf-section">
+    <div class="site-container">
+        <div class="w-layout-grid grid-6">
+            <div
+                class="{% if include.style.content_alignment == 'Center' %} center-all-full {% elsif include.style.content_alignment == 'Right' %} right-aline-all {% else %} left-aline-all {% endif %}">
+                <h2 class="heading-9">{{ include.content.heading }}</h2>
+                <div class="blue-line"></div>
+                <div class="paragraph-8 w-richtext">
+                    {{ include.content.description_html }}
+                </div>
+                {% if include.content.include_button %}
+                {% if include.content.button.background_color == "black" %}
+                <a href="{{ include.content.button.link }}" class="button w-button">{{ include.content.button.text }}</a>
+                {% else %}
+                <a href="{{ include.content.button.link }}" class="button blue-button lage-blue w-button">{{ include.content.button.text
+                    }}</a>
+                {% endif %}
+                {% endif %}
+            </div>
+            <div id="w-node-dd9e681d-96d1-b3ed-af53-43ab21091663-88937168" class="image-wrapper">
+                {% bookshop image src=include.content.image alt=include.content.alt width="100vw" loading="lazy" layout="fill" %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% elsif include.content.image_position == "Left" %}
+
+<div class="right-col-aline-image-section wf-section">
+    <div class="site-container">
+        <div class="w-layout-grid grid-6">
+            <div id="w-node-dd9e681d-96d1-b3ed-af53-43ab21091663-88937168" class="image-wrapper">
+                {% bookshop image src=include.content.image alt=include.content.alt width="100vw" loading="lazy" layout="fill" %}
+            </div>
+            <div
+                class="{% if include.style.content_alignment == 'Center' %} center-all-full {% elsif include.style.content_alignment == 'Right' %} right-aline-all {% else %} left-aline-all {% endif %}">
+                <h2 class="heading-9">{{ include.content.heading }}</h2>
+                <div class="blue-line"></div>
+                <div class="paragraph-8 w-richtext">
+                    {{ include.content.description_html }}
+                </div>
+                {% if include.content.include_button %}
+                {% if include.content.button.background_color == "black" %}
+                <a href="{{ include.content.button.link }}" class="button w-button">{{ include.content.button.text }}</a>
+                {% else %}
+                <a href="{{ include.content.button.link }}" class="button blue-button lage-blue w-button">{{ include.content.button.text
+                    }}</a>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% else %}
+<div class="right-col-aline-image-section wf-section">
+    <div class="site-container">
+        <div class="center-all-full max-width-100ch">
+            <h2 class="heading-9">{{ include.content.heading }}</h2>
+            <div class="blue-line"></div>
+            <div class="paragraph-8 w-richtext">
+                {{ include.content.description_html }}
+            </div>
+            {% if include.content.include_button %}
+            {% if include.content.button.background_color == "black" %}
+            <a href="{{ include.content.button.link }}" class="button w-button">{{ include.content.button.text }}</a>
+            {% else %}
+            <a href="{{ include.content.button.link }}" class="button blue-button lage-blue w-button">{{ include.content.button.text
+                }}</a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
