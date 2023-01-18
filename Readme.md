@@ -1,50 +1,75 @@
-# Sendit
+# Dante
 
-Sendit is a polished, marketing website template for Eleventy. Browse through a [live demo](https://potent-ship.cloudvent.net/).
+Dante serves as an example of a fully-functioning implementation of [Bookshop 2.0](https://github.com/CloudCannon/bookshop) on a simple website.
 
-![Sendit template screenshot](/site/images/_screenshot.png)
+![Dante template screenshot](site/images/_screenshot.png)
 
-[![Deploy to CloudCannon](https://buttons.cloudcannon.com/deploy.svg)](https://app.cloudcannon.com/register#sites/connect/github/CloudCannon/sendit-eleventy-template)
+Find more templates, themes and step-by-step Jekyll tutorials at [CloudCannon Community](https://cloudcannon.com/community/).
+
+[![Deploy to CloudCannon](https://buttons.cloudcannon.com/deploy.svg)](https://app.cloudcannon.com/register#sites/connect/github/CloudCannon/dante-jekyll-bookshop-template)
 
 ## Features
 
-- Pre-built pages
-- Pre-styled components
-- Blog with pagination and category pages
-- Configurable navigation and footer
-- Multiple hero options
-- Configurable theme colors
-- Optimised for editing in CloudCannon
+* Live editing with [CloudCannon](http://cloudcannon.com/)
+* Component library for website building
+* Fully configurable Website
+* Pre-built pages
+* Pre-styled components
+* Blog
+* Portfolio
+* Staff and author system
+* Optimised for editing in [CloudCannon](http://cloudcannon.com/)
+* Search engine optimisation
 
 ## Setup
 
-Get a workflow going to see your site's output (with [CloudCannon](https://app.cloudcannon.com/) or locally).
+Dante was built with [Jekyll](http://jekyllrb.com/) version 4.2.0, but should support newer versions as well.
 
-## Prerequisites
+Install the dependencies for Bookshop:
 
-## Quickstart
+~~~bash
+$ npm install
+~~~
 
-2. Run `npm i` to install the modules.
-3. Run `npm run start` to run the project. this will create a \_site folder, where all the developed file will remain.
+Install the Jekyll dependencies with [Bundler](http://bundler.io/):
 
-By default the site will be at `http://localhost:8080`
+~~~bash
+$ cd site
+$ bundle install
+~~~
+
+Run the website:
+
+~~~bash
+$ cd ../
+$ npm start
+~~~
 
 ## Editing
 
-Sendit is set up for adding, updating and removing pages, components, posts, navigation and footer elements in [CloudCannon](https://app.cloudcannon.com/).
+Dante is already optimised for adding, updating and removing pages, and components within CloudCannon.
 
-### Nav/footer details
+### Posts
+
+* Add, update or remove a post in the *Posts* collection.
+* The **Author Staff Member** field links to members in the **Staff Members** collection.
+* Change the defaults when new posts are created in `_posts/_defaults.md`.
+
+### Contact Forms
+
+* Preconfigured to work with CloudCannon, but easily changed to another provider (e.g. [FormSpree](https://formspree.io/)).
+* Sends email to the address defined within the component.
+
+### Staff Members
 
 * Reused around the site to save multiple editing locations.
-* Set in the *Data* section with respective names
 
-### SEO details and favicon
+### Navigation
 
-* Favicon and site SEO details are set in the *Data* / *Site* section
-* SEO details can also be set in pages for page specific details
+* Managed as a data file to give clients better access.
+* Set in the *Data > Navigation* section.
 
-### Theme colors
+### Footer
 
-* Theme colors can be set in *Data* / *Site* / *theme*
-* The main colors are set and variants of them are computed
-* The colors will update on the next build
+* Managed as a data file to give clients better access.
+* Set in the *Data > Footer* section.

@@ -1,187 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="utf-8" />
-      <title>{{page.title}} | {{ site.data.site.site_title }}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+{% assign general_settings = site.data.general %}
 
-      {%- comment -%} Page description for SEO {%- endcomment -%}
-      {% if page.SEO.page_description %}
-         <meta name="description" content="{{ page.SEO.page_description }}">
-         <meta property="og:description" content="{{ page.SEO.page_description }}" />
-      {% else %}
-         <meta name="description" content="{{ site.data.site.description }}">
-         <meta property="og:description" content="{{ site.data.site.description }}" />
-      {% endif %}
+{% if page.title %}
+	{% capture title  %}
+		{{page.title}} | {{ general_settings.website_title }}
+	{% endcapture %}
+{% else %}
+	{% assign title = general_settings.website_title %}
+{% endif %}
 
-      {% comment %} meta tags for open graph and twitter {% endcomment %}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="{{ site.data.site.twitter_site }}" />
-      {% if page.url == "/" %}
-         <meta name="og:title" content="{{site.data.site.site_title }}" />
-         <meta property="og:type" content="website" />
-         <meta name="og:image" content="{{ site.data.site.image }}" />
-         <meta name="twitter:creator" content="{{ site.data.site.twitter_site }}" />
-         <meta name="twitter:title" content="{{ site.data.site.site_title }}" />
-         {% if site.data.site.twitter_image %}
-            <meta name="twitter:image" content="{{ site.data.site.twitter_image }}" />
-         {% else %}
-            <meta name="twitter:image" content="{{ site.data.site.image }}" />
-         {% endif %}
-      {% else %}
-         <meta name="og:title" content="{{ page.title }}" />
-         <meta name="twitter:title" content="{{ page.title }}" />
-         {% if page.SEO.open_graph_type %}
-            <meta property="og:type" content="{{ page.SEO.open_graph_type }}" />
-         {% else %}
-            <meta property="og:type" content="website" />
-         {% endif %}
-         {% if page.SEO.featured_image %}
-            <meta name="og:image" content="{{ page.SEO.featured_image }}" />
-            <meta name="twitter:image" content="{{ page.SEO.featured_image }}" />
-         {% else %}
-            <meta name="og:image" content="{{ site.data.site.image }}" />
-            {% if site.data.site.twitter_image %}
-               <meta name="twitter:image" content="{{ site.data.site.twitter_image }}" />
-            {% else %}
-               <meta name="twitter:image" content="{{site.data.site.image }}" />
-            {% endif %}
-         {% endif %}
-         {% if page.SEO.author_twitter_handle %}  
-            <meta name="twitter:creator" content="{{ page.SEO.author_twitter_handle }}" />
-         {% else %}
-            <meta name="twitter:creator" content="{{ site.data.site.twitter_site }}" />
-         {% endif %}
-      {% endif %}
+{% if page.description %}
+	{% assign description = page.description %}
+{% else %}
+	{% assign description = general_settings.description %}
+{% endif %}
 
-      {% comment %} Add robots no index {% endcomment %}
-      {% if page.SEO.no_index %}
-         <meta name="robots" content="noindex">
-         <meta name="googlebot" content="noindex">
-      {% endif %}
+{% assign favicon = general_settings.site_icon_image %}
 
-      {%- comment -%} Canonical URL for SEO {%- endcomment -%}
-      {% if page.SEO.canonical_url %}
-         <link rel="canonical" href="{{ site.data.site.BaseURL }}{{ page.SEO.canonical_url | url }}" />
-      {% else %}
-         <link rel="canonical" href="{{ site.data.site.BaseURL }}{{ page.url | url }}" />
-      {% endif %}
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      {%- comment -%} Styles {%- endcomment -%}
-      <link href="/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
-      <link href="/vendor/phosphor-icons/css/phosphor.css" rel="stylesheet" />
-      <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" />
-      <link rel="stylesheet" href="/css/theme.css" />
+	<!-- Primary Meta Tags -->
+	<title>{{ title }}</title>
+	<meta name="title" content="{{ title }}">
+	<meta name="description" content="{{ description }}">
 
-      {%- comment -%} Favicon {%- endcomment -%}
-      <link rel="shortcut icon" href="{{ site.data.site.favicon_icon }}" type="image/x-icon" />
-      <link rel="icon" href="{{ site.data.site.favicon_image }}" type="image/x-icon" />
-      <link rel="apple-touch-icon" href="{{ site.data.site.favicon_image }}">
-   </head>
-   <body>
-      <header>
-         {%- assign nav = site.data.nav -%}
-         <nav
-            class="navbar navbar-expand-lg position-fixed w-100 zindex-dropdown"
-            id="mainnavigationBar"
-         >
-            <div class="container-fluid">
-               <a class="navbar-brand" href="/">
-                  <img src="{{ nav.logo }}" alt="Nav-Logo" />
-               </a>
-               <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-               >
-                  <span class="navbar-toggler-default">
-                     <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                     >
-                        <line
-                           x1="3.5"
-                           y1="5.5"
-                           x2="21.5"
-                           y2="5.5"
-                           stroke="#292D32"
-                           stroke-width="3"
-                           stroke-linecap="round"
-                           stroke-linejoin="round"
-                        />
-                        <line
-                           x1="4.5"
-                           y1="12.5"
-                           x2="21.5"
-                           y2="12.5"
-                           stroke="#292D32"
-                           stroke-width="3"
-                           stroke-linecap="round"
-                           stroke-linejoin="round"
-                        />
-                        <line
-                           x1="11.5"
-                           y1="19.5"
-                           x2="21.5"
-                           y2="19.5"
-                           stroke="#292D32"
-                           stroke-width="3"
-                           stroke-linecap="round"
-                           stroke-linejoin="round"
-                        />
-                     </svg>
-                  </span>
-                  <span class="navbar-toggler-toggled">
-                     <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 28 28"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                     >
-                        <path
-                           d="M21.5 6.5L6.5 21.5"
-                           stroke="#404152"
-                           stroke-width="3"
-                           stroke-linecap="round"
-                           stroke-linejoin="round"
-                        />
-                        <path
-                           d="M21.5 21.5L6.5 6.5"
-                           stroke="#404152"
-                           stroke-width="3"
-                           stroke-linecap="round"
-                           stroke-linejoin="round"
-                        />
-                     </svg>
-                  </span>
-               </button>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mx-auto mb-20 mb-lg-0">
-                     {% for item in nav.items %} 
-                     {% assign url = item.link %} 
-                        <li class="nav-item">
-                           <a class="nav-link {% if page.url == url %}active{% endif %}"
-                              href="{{ item.link }}">{{ item.text }}</a>
-                        </li>
-                     {% endfor %}
-                  </ul>
-               </div>
-               <div class="d-none d-lg-block">
-                  <div class="nav-item">
-                     <a href="{{ nav.button.link }}" class="btn btn-sm btn-links"
-                        >{{ nav.button.text }}</a
-                     >
-                  </div>
-               </div>
-            </div>
-         </nav>
-      </header>
-      
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="{{ general_settings.website_url }}{{ page.url | remove: ".html" }}">
+	<meta property="og:title" content="{{ title }}">
+	<meta property="og:description" content="{{ description }}">
+	<meta property="og:image" content="{{general_settings.website_url}}{{ favicon }}">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="{{ general_settings.website_url }}{{ page.url | remove: ".html" }}">
+	<meta property="twitter:title" content="{{ title }}">
+	<meta property="twitter:description" content="{{ description }}">
+	<meta property="twitter:image" content="{{ general_settings.website_url }}{{ favicon }}">
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "website",
+			"name": "{{ general_settings.website_title }}",
+			"image": "{{ general_settings.website_url }}{{ general_settings.site_icon_image }}",
+			"logo": "{{ general_settings.website_url }}{{general_settings.logo_image }}",
+			"url": "{{ general_settings.website_url }}",
+		}
+	</script>
+	<!-- favicon -->
+	<link rel="icon" href="{{ favicon }}" type="image/png" sizes="16x16">
+	<!-- touch-icons -->
+	<link rel="shortcut icon" href="{{ favicon }}">
+	<link rel="apple-touch-icon-precomposed" href="{{ favicon }}">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ favicon }}">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ favicon }}">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ favicon }}">
+	<!-- main css -->
+	<link rel="stylesheet" href="{{ "/assets/main.css" | prepend: site.baseurl }}">
+	<!-- fontawesome css -->
+	<link rel="stylesheet" href="/assets/css/lib/fontawesome/all.css" type="text/css" media="screen" />
+	<!-- bootstrap jquery -->
+	<script src="/assets/js/jquery-3.3.1.slim.min.js"></script>
+	<!-- google fonts -->
+	{% if general_settings.fonts %}
+		{% for fonts in general_settings.fonts %}
+			<link href="{{ fonts.font_style_url }}" rel="stylesheet">
+		{% endfor %}
+	{% endif %}
+</head>
